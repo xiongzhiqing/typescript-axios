@@ -34,3 +34,12 @@ export interface AxiosResponse {
 
 // 继承 Promise泛型接口 传递类型 AxiosResponse
 export interface AxiosPromise extends Promise<AxiosResponse> {}
+
+// 继承 Error
+export interface AxiosError extends Error {
+  isAxiosError: boolean
+  config: AxiosRequestConfig
+  code?: string | null
+  request?: any
+  response?: AxiosResponse
+}
