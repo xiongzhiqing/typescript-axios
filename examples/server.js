@@ -32,6 +32,7 @@ baseRouter()
 errorRouter()
 extendRouter()
 interceptorRouter()
+configRouter()
 
 
 app.use(router)
@@ -136,5 +137,11 @@ function extendRouter () {
 function interceptorRouter () {
   router.get('/interceptor/get', (req, res) => {
     res.end('hello')
+  })
+}
+
+function configRouter () {
+  router.post('/config/post', function (req, res) {
+    res.json(req.body)
   })
 }

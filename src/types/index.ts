@@ -21,6 +21,11 @@ export interface AxiosRequestConfig {
   headers?: any
   responseType?: XMLHttpRequestResponseType // 响应数据类型 XMLHttpRequestResponseType ts内部定义
   timeout?: number // 超时时间
+
+  transformRequest?: AxiosTransformer | AxiosTransformer[]
+  transformResponse?: AxiosTransformer | AxiosTransformer[]
+  // 字符串索引签名
+  [prop: string]: any
 }
 
 export interface AxiosResponse<T = any> {
@@ -70,6 +75,10 @@ export interface AxiosInstance extends Axios {
   <T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
 }
 
+export interface AxiosStatic extends AxiosInstance {
+  // 静态方法
+  create(config: AxiosRequestConfig): AxiosInstance
+}
 // 拦截器
 export interface AxiosInterceptorManager<T> {
   // 函数类型接口 返回一个拦截器id 给eject使用
@@ -85,4 +94,8 @@ export interface ResolvedFn<T> {
 
 export interface RejectedFn {
   (error: any): any
+}
+
+export interface AxiosTransformer {
+  (data: any, headers?: any): any
 }
