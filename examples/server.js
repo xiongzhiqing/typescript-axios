@@ -31,6 +31,7 @@ simpleRouter()
 baseRouter()
 errorRouter()
 extendRouter()
+interceptorRouter()
 
 
 app.use(router)
@@ -128,5 +129,12 @@ function extendRouter () {
         age: '18'
       }
     })
+  })
+}
+
+
+function interceptorRouter () {
+  router.get('/interceptor/get', (req, res) => {
+    res.end('hello')
   })
 }
