@@ -68,11 +68,14 @@ axios({
     a: 1,
     b: 2
   }
+}).then(res => {
+  console.log(res)
 })
 
 axios({
   method: 'post',
   url: '/base/post',
+  responseType: 'json',
   headers: {
     'content-type': 'application/json',
     'Accept': 'application/json, text/plain, */*'
@@ -81,6 +84,8 @@ axios({
     a: 1,
     b: 2
   }
+}).then(res => {
+  console.log(res)
 })
 
 const arr = new Int32Array([21, 31])
