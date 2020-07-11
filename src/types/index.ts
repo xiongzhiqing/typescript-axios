@@ -87,6 +87,13 @@ export interface Axios {
   post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
   put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
   patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
+  // 获取url
+  getUri(config?: AxiosRequestConfig): string
+}
+// 类类型
+export interface AxiosClassStatic {
+  // 构造函数 -> 返回Axios实例类型
+  new (config: AxiosRequestConfig): Axios
 }
 
 // 混合类型接口， 本身只是个函数，继承Axios接口（相当于 即有函数类型，又有属性方法）
@@ -105,6 +112,14 @@ export interface AxiosStatic extends AxiosInstance {
   Cancel: CancelStatic
   // 函数
   isCancel: (val: any) => boolean
+
+  all<T>(promise: Array<T | Promise<T>>): Promise<T[]>
+  // T参数类型 R返回值类型
+  // callback参数
+  // 返回值是一个函数，arr返回值函数的参数
+  spread<T, R>(callback: (...arg: T[]) => R): (arr: T[]) => R
+
+  Axios: AxiosClassStatic
 }
 // 拦截器
 export interface AxiosInterceptorManager<T> {

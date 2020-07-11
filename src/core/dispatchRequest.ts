@@ -24,7 +24,7 @@ function processConfig(config: AxiosRequestConfig): void {
 }
 
 // 处理url
-function transformURL(config: AxiosRequestConfig): string {
+export function transformURL(config: AxiosRequestConfig): string {
   let { url, params, paramsSerializer, baseURL } = config
 
   if (baseURL && !isAbsoluteURL(url!)) {
