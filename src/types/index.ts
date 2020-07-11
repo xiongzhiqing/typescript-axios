@@ -27,6 +27,8 @@ export interface AxiosRequestConfig {
 
   cancelToken?: CancelToken
 
+  withCredentials?: boolean
+
   // 字符串索引签名
   [prop: string]: any
 }

@@ -5,7 +5,7 @@ const source = CancelToken.source()
 
 axios.get('/cancel/get', {
   cancelToken: source.token
-}).catch((e) => {
+}).catch((e: Cancel) => {
   if (axios.isCancel(e)) {
     console.log('Request canceled', e.message)
   }
@@ -17,7 +17,7 @@ setTimeout(_ => {
 
   axios.post('/cancel/post', { a: 1 }, {
     cancelToken: source.token
-  }).catch(e => {
+  }).catch((e: Cancel) => {
     if (axios.isCancel(e)) {
       console.log(e.message, 'post')
     }
@@ -30,12 +30,12 @@ axios.get('/cancel/get', {
   cancelToken: new CancelToken(c => {
     cancel = c
   })
-}).catch(e => {
+}).catch((e: Cancel) => {
   if (axios.isCancel(e)) {
-    console.log('Request canceled', e)
+    console.log('Request canceled', e.message)
   }
 })
 
 setTimeout(_ => {
   cancel()
-}, 2000)
+}, 1000)
