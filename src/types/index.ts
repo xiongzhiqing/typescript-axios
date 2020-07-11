@@ -29,6 +29,9 @@ export interface AxiosRequestConfig {
 
   withCredentials?: boolean
 
+  xsrfCookieName?: string
+  xsrfHeaderName?: string
+
   // 字符串索引签名
   [prop: string]: any
 }
