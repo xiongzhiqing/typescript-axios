@@ -32,6 +32,9 @@ export interface AxiosRequestConfig {
   xsrfCookieName?: string
   xsrfHeaderName?: string
 
+  onDownloadProgress?: (e: ProgressEvent) => void
+  onUploadProgress?: (e: ProgressEvent) => void
+
   // 字符串索引签名
   [prop: string]: any
 }
@@ -85,7 +88,7 @@ export interface AxiosInstance extends Axios {
 
 export interface AxiosStatic extends AxiosInstance {
   // 静态方法
-  create(config: AxiosRequestConfig): AxiosInstance
+  create(config?: AxiosRequestConfig): AxiosInstance
 
   // 静态属性
   CancelToken: CancelTokenStatic
