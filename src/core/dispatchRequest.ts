@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types'
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse, Axios } from '../types'
 import { buildURL } from '../helpers/url'
 import { flattenHeaders } from '../helpers/headers'
 
@@ -9,6 +9,7 @@ import transform from './transform'
 
 // 导出函数
 export default function axios(config: AxiosRequestConfig): AxiosPromise {
+  throwIfCancellationRequested(config)
   processConfig(config)
   return xhr(config).then(res => {
     return transformResponseData(res)
@@ -33,4 +34,11 @@ function transformURL(config: AxiosRequestConfig): string {
 function transformResponseData(res: AxiosResponse): AxiosResponse {
   res.data = transform(res.data, res.headers, res.config.transformResponse)
   return res
+}
+
+function throwIfCancellationRequested(config: AxiosRequestConfig): void {
+  if (config.cancelToken) {
+    // 检测cancelToken是否被使用过（this.reason是否为真)
+    config.cancelToken.throwIfRequested()
+  }
 }

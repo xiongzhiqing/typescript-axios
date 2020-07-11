@@ -33,6 +33,7 @@ errorRouter()
 extendRouter()
 interceptorRouter()
 configRouter()
+cancelRouter()
 
 
 app.use(router)
@@ -143,5 +144,21 @@ function interceptorRouter () {
 function configRouter () {
   router.post('/config/post', function (req, res) {
     res.json(req.body)
+  })
+}
+
+
+function cancelRouter () {
+  router.get('/cancel/get', function (req, res) {
+
+    setTimeout(() => {
+      res.json('hello')
+    }, 1000)
+  })
+
+  router.post('/cancel/post', function (req, res) {
+    setTimeout(() => {
+      res.json(res.body)
+    }, 1000)
   })
 }
