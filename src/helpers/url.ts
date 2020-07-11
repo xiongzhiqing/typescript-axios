@@ -77,6 +77,24 @@ export function buildURL(
   return url
 }
 
+// url是否是一个绝对路径
+export function isAbsoluteURL(url: string): boolean {
+  // ? -> 0次或者一次; * -> 0次或者多次
+  // 字母开头^[a-z],
+  // 拼接字母或数字或+或-或.（[a-z\d\+\-\.]*）0个或多个
+  // 拼接':'
+  // 拼接两个斜线'\/\/'
+  // 两个斜线之前可有可无'(...)?'  (^[a-z][a-z\d\+\-\.]*:)?
+  return /(^[a-z][a-z\d\+\-\.]*:)?\/\//.test(url)
+}
+
+// 拼接url
+export function combineURL(baseURL: string, relativeURL?: string): string {
+  // 正则：/\/+$/  匹配末尾的斜线一个或多个
+  // 正则：/^\/+/ 匹配前面的斜线一个或多个
+  return relativeURL ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '') : baseURL
+}
+
 // url是否是同源
 export function isURLSameOrigin(requestURL: string): boolean {
   const parsedOrigin = resolveURL(requestURL)

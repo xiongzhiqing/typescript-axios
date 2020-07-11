@@ -34,6 +34,8 @@ export interface AxiosRequestConfig {
 
   auth?: AxiosBasicCredentials
 
+  baseURL?: string
+
   // 自定义合法状态码
   validateStatus?: (status: number) => boolean
 

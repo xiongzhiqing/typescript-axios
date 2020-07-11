@@ -152,3 +152,10 @@ instance1.get('/more/get', {
 }).then(res => {
   console.log(res, 'paramsSerializer')
 })
+
+const instance2 = axios.create({
+  baseURL: 'https://img.mukewang.com/'
+})
+
+instance2.get('5cbf00cb092626c820000400.jpg')
+instance2.get('http://img.mukewang.com/szimg/5cbf00cb092626c820000400.jpg')
