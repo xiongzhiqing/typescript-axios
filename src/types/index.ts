@@ -34,6 +34,9 @@ export interface AxiosRequestConfig {
 
   auth?: AxiosBasicCredentials
 
+  // 自定义合法状态码
+  validateStatus?: (status: number) => boolean
+
   onDownloadProgress?: (e: ProgressEvent) => void
   onUploadProgress?: (e: ProgressEvent) => void
 

@@ -26,7 +26,12 @@ const defaults: AxiosRequestConfig = {
     function(data: any): any {
       return transformResponse(data)
     }
-  ]
+  ],
+
+  // 默认合法状态码规则
+  validateStatus(status: number): boolean {
+    return status >= 200 && status < 300
+  }
 }
 
 // 没有data参数的请求类型key

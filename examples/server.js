@@ -187,7 +187,6 @@ function moreRouter () {
     const auth = req.headers.authorization
     const [type, credentials] = auth.split(' ')
 
-    console.log(atob(credentials))
     const [username, password] = atob(credentials).split(':')
     if (type === 'Basic' && username === 'Qing' && password === 'q123456') {
       res.json(req.body)
@@ -200,5 +199,10 @@ function moreRouter () {
   router.post('/more/upload', (req, res) => {
     console.log(req.body, req.files)
     res.end('upload success!')
+  })
+
+  router.get('/more/304', (req, res) => {
+    res.status(304)
+    res.end()
   })
 }
