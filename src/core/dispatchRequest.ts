@@ -25,9 +25,9 @@ function processConfig(config: AxiosRequestConfig): void {
 
 // 处理url
 function transformURL(config: AxiosRequestConfig): string {
-  const { url, params } = config
+  const { url, params, paramsSerializer } = config
   // 类型断言 url! 不为空
-  return buildURL(url!, params)
+  return buildURL(url!, params, paramsSerializer)
 }
 
 // 处理返回（response）data

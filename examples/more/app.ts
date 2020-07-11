@@ -2,7 +2,7 @@ import axios from "../../src";
 import 'nprogress/nprogress.css'
 import NProgress from 'nprogress'
 import { AxiosError } from "../../src/helpers/error";
-import { stat } from "fs";
+import qs from 'qs'
 
 // document.cookie = 'a=b'
 // withCredentials
@@ -115,4 +115,40 @@ axios.get('/more/304', {
   console.log(res)
 }).catch((e: AxiosError) => {
   console.log(e.message)
+})
+
+// paramsSerializer
+axios.get('/more/get', {
+  params: new URLSearchParams('a=b&c=d')
+}).then(res => {
+  console.log(res, 'URLSearchParams')
+})
+
+axios.get('/more/get', {
+  params: {
+    a: 1,
+    b: 2,
+    c: ['a', 'b', 'c']
+  }
+}).then(res => {
+  console.log(res, '----')
+})
+
+const instance1 = axios.create({
+  // params
+  paramsSerializer(params) {
+    return qs.stringify(params, {
+      arrayFormat: 'brackets'
+    })
+  }
+})
+
+instance1.get('/more/get', {
+  params: {
+    a: 1,
+    b: 2,
+    c: ['a', 'b', 'c']
+  }
+}).then(res => {
+  console.log(res, 'paramsSerializer')
 })

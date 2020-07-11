@@ -1,4 +1,4 @@
-import { isDate, isPlainObject } from './util'
+import { isDate, isPlainObject, isURLSearchParams } from './util'
 
 interface URLOrigin {
   protocol: string
@@ -16,38 +16,53 @@ function encode(val: string): string {
     .replace(/%5D/gi, ']')
 }
 
-export function buildURL(url: string, params?: any): string {
+export function buildURL(
+  url: string,
+  params?: any,
+  paramsSerialize?: (params: any) => string
+): string {
   if (!params) {
     return url
   }
-  const parts: string[] = []
-  Object.keys(params).forEach(key => {
-    const val = params[key]
-    if (val === null || typeof val === 'undefined') {
-      // 进入下一次循环
-      return
-    }
-    let values = []
-    if (Array.isArray(val)) {
-      values = val
-      key += '[]'
-    } else {
-      values = [val]
-    }
 
-    values.forEach(val => {
-      if (isDate(val)) {
-        val = val.toISOString()
+  let serializedParams
+
+  if (paramsSerialize) {
+    // 传入了自定义序列化方法
+    serializedParams = paramsSerialize(params)
+  } else if (isURLSearchParams(params)) {
+    // params是URLSearchParams类型，直接toString
+    serializedParams = params.toString()
+  } else {
+    const parts: string[] = []
+    Object.keys(params).forEach(key => {
+      const val = params[key]
+      if (val === null || typeof val === 'undefined') {
+        // return 不能终止循环，只会进入下一次循环
+        return
       }
-      if (isPlainObject(val)) {
-        val = JSON.stringify(val)
+      let values = []
+      if (Array.isArray(val)) {
+        values = val
+        key += '[]'
+      } else {
+        values = [val]
       }
 
-      parts.push(`${encode(key)}=${encode(val)}`)
+      values.forEach(val => {
+        if (isDate(val)) {
+          val = val.toISOString()
+        }
+        if (isPlainObject(val)) {
+          val = JSON.stringify(val)
+        }
+
+        parts.push(`${encode(key)}=${encode(val)}`)
+      })
     })
-  })
 
-  let serializedParams = parts.join('&')
+    serializedParams = parts.join('&')
+  }
 
   if (serializedParams) {
     const markIndex = url.indexOf('#')
