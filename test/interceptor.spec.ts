@@ -107,11 +107,11 @@ describe('interceptors', () => {
         status: 200,
         responseText: 'OK'
       })
-
+      // 100ms 会导致偶现response为undefined
       setTimeout(() => {
         expect(response.data).toBe('OK - modified by interceptor')
         done()
-      }, 100)
+      }, 200)
     })
   })
 
