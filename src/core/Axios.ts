@@ -48,6 +48,8 @@ export default class Axios {
 
     // 发送请求之前  合并配置
     config = mergeConfig(this.defaults, config)
+    // 统一把请求方法装换为小写
+    config.method = config.method.toLowerCase()
 
     // 链式调用
     const chain: PromiseChain<any>[] = [
