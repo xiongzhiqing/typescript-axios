@@ -160,7 +160,7 @@ const instance2 = axios.create({
 instance2.get('5cbf00cb092626c820000400.jpg')
 instance2.get('http://img.mukewang.com/szimg/5cbf00cb092626c820000400.jpg')
 
-// 静态方法扩展all、sperad、getUri
+// 静态方法扩展all、sperad、getUri 
 function getA() {
   return axios.get('/more/A')
 }
