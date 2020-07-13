@@ -189,6 +189,7 @@ describe('requests', () => {
         responseText: '{"error": "BAD USERNAME", "code": 1}'
       })
 
+      // done异步测试
       setTimeout(() => {
         expect(typeof response.data).toBe('object')
         expect(response.data.error).toBe('BAD USERNAME')
