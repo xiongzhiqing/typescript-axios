@@ -31,14 +31,14 @@ export function parseHeaders(headers: string): any {
   }
 
   headers.split('\r\n').forEach(line => {
-    let [key, val] = line.split(':')
+    // vals 有可能存在key后面接':'的情况
+    let [key, ...vals] = line.split(':')
     key = key.trim().toLowerCase()
     if (!key) {
       return
     }
-    if (val) {
-      val = val.trim()
-    }
+    // vals中都是通过'split'切分出来的值
+    const val = vals.join(':').trim()
     parsed[key] = val
   })
 

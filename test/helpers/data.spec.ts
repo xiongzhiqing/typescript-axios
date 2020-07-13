@@ -4,7 +4,7 @@ describe('helpers:data', () => {
   describe('transformRequest', () => {
     test('should transform request data to string if data is a PlainObject', () => {
       const a = { a: 1 }
-      expect(transformRequest(a)).toBe('{"a": 1}')
+      expect(transformRequest(a)).toBe('{"a":1}')
     })
 
     test('should do nothing if data is not a PlainObject', () => {

@@ -80,12 +80,12 @@ export function buildURL(
 // url是否是一个绝对路径
 export function isAbsoluteURL(url: string): boolean {
   // ? -> 0次或者一次; * -> 0次或者多次
-  // 字母开头^[a-z],
+  // 字母开头[a-z],
   // 拼接字母或数字或+或-或.（[a-z\d\+\-\.]*）0个或多个
   // 拼接':'
   // 拼接两个斜线'\/\/'
   // 两个斜线之前可有可无'(...)?'  (^[a-z][a-z\d\+\-\.]*:)?
-  return /(^[a-z][a-z\d\+\-\.]*:)?\/\//.test(url)
+  return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url)
 }
 
 // 拼接url
