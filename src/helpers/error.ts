@@ -7,7 +7,8 @@ export class AxiosError extends Error {
   code?: string | null
   request?: any
   response?: AxiosResponse
-
+  // 忽略测试
+  /* istanbul ignore next */
   constructor(
     message: string,
     config: AxiosRequestConfig,
@@ -15,7 +16,6 @@ export class AxiosError extends Error {
     request?: any,
     response?: AxiosResponse
   ) {
-    /*  */
     super(message)
 
     this.config = config

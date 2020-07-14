@@ -99,6 +99,7 @@ describe('interceptors', () => {
     })
 
     instance('/foo').then(res => {
+      console.log(res, res.data, '=====res')
       response = res
     })
 
@@ -111,7 +112,7 @@ describe('interceptors', () => {
       setTimeout(() => {
         expect(response.data).toBe('OK - modified by interceptor')
         done()
-      }, 200)
+      }, 300)
     })
   })
 

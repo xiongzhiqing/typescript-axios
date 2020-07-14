@@ -9,7 +9,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
     const {
       url,
-      method = 'get',
+      method,
       data = null,
       headers = {},
       responseType,
@@ -27,7 +27,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     const request = new XMLHttpRequest()
 
     // 类型断言 url! 不为空
-    request.open(method.toUpperCase(), url!, true)
+    request.open(method!.toUpperCase(), url!, true)
 
     configureRequest()
 
@@ -66,7 +66,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         }
         // parseHeaders 把headers按规则转换成json对象
         const responseHeaders = parseHeaders(request.getAllResponseHeaders())
-        const responseData = responseType !== 'text' ? request.response : request.responseText
+        const responseData =
+          responseType && responseType !== 'text' ? request.response : request.responseText
 
         const { status, statusText } = request
 
