@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "keywords": [],
-  "main": "dist/typescript-axios.umd.js",
-  "module": "dist/typescript-axios.es5.js",
-  "typings": "dist/types/typescript-axios.d.ts",
+  "main": "dist/axios.umd.js",
+  "module": "dist/axios.es5.js",
+  "typings": "dist/types/axios.d.ts",
   "files": [
     "dist"
   ],
